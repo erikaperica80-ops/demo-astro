@@ -1,0 +1,39 @@
+{
+  "templateKey": "generic-dental",
+  "version": "1.0.0",
+  "sections": {
+    "hero": {
+      "heading": "Sonríe con Confianza",
+      "subheading": "Atención dental de primer nivel para toda la familia.",
+      "cta_label": "Reservar Cita",
+      "cta_url": "#contacto",
+      "image_url": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&q=80"
+    },
+    "testimonials": {
+      "heading": "Lo que dicen nuestros pacientes",
+      "testimonial_1_name": "María García",
+      "testimonial_1_text": "Excelente atención. El equipo es muy profesional y amable.",
+      "testimonial_1_rating": 5,
+      "testimonial_2_name": "Carlos López",
+      "testimonial_2_text": "Me hicieron sentir cómodo desde el primer momento.",
+      "testimonial_2_rating": 5,
+      "testimonial_3_name": "Ana Martínez",
+      "testimonial_3_text": "Llevé a mis hijos y quedaron encantados con el dentista.",
+      "testimonial_3_rating": 4
+    },
+    "location": {
+      "heading": "Encuéntranos",
+      "address": "Calle Principal 123, Ciudad, País",
+      "phone": "+1 (555) 000-1234",
+      "email": "contacto@clinicadental.demo",
+      "hours": "Lunes–Viernes: 9:00–18:00 | Sábado: 9:00–14:00",
+      "map_url": "https://maps.google.com"
+    },
+    "cta": {
+      "heading": "¿Listo para tu próxima cita?",
+      "subheading": "Agenda tu consulta hoy y recibe tu primera revisión sin costo.",
+      "button_label": "Agendar Ahora",
+      "button_url": "mailto:contacto@clinicadental.demo"
+    }
+  }
+}

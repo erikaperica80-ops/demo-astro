@@ -1,0 +1,91 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  og?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    type?: string;
+  };
+  twitter?: {
+    card?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+  };
+  theme?: {
+    primary?: string;
+    secondary?: string;
+    accent?: string;
+    font?: string;
+  };
+}
+
+import '../styles/global.css';
+
+const {
+  title,
+  description = '',
+  canonical,
+  robots = 'index, follow',
+  og = {},
+  twitter = {},
+  theme = {},
+} = Astro.props;
+
+const ogTitle = og.title ?? title;
+const ogDescription = og.description ?? description;
+const ogType = og.type ?? 'website';
+const twitterCard = twitter.card ?? 'summary_large_image';
+const twitterTitle = twitter.title ?? title;
+const twitterDescription = twitter.description ?? description;
+
+const primaryColor = theme.primary ?? '#2563eb';
+const secondaryColor = theme.secondary ?? '#1e40af';
+const accentColor = theme.accent ?? '#f59e0b';
+const fontFamily = theme.font ?? 'system-ui, sans-serif';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content={robots} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={ogTitle} />
+    {ogDescription && <meta property="og:description" content={ogDescription} />}
+    <meta property="og:type" content={ogType} />
+    {og.image && <meta property="og:image" content={og.image} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={twitterTitle} />
+    {twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
+    {twitter.image && <meta name="twitter:image" content={twitter.image} />}
+
+    <!-- Theme CSS variables -->
+    <style define:vars={{ primaryColor, secondaryColor, accentColor, fontFamily }}>
+      :root {
+        --color-primary: var(--primaryColor);
+        --color-secondary: var(--secondaryColor);
+        --color-accent: var(--accentColor);
+        --font-family-base: var(--fontFamily);
+      }
+      body {
+        font-family: var(--font-family-base);
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>

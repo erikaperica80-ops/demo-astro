@@ -1,0 +1,39 @@
+{
+  "templateKey": "generic-legal",
+  "version": "1.0.0",
+  "sections": {
+    "hero": {
+      "heading": "Defending Your Rights",
+      "subheading": "Experienced attorneys committed to justice for individuals and businesses alike.",
+      "cta_label": "Free Consultation",
+      "cta_url": "#contact",
+      "image_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80"
+    },
+    "testimonials": {
+      "heading": "Client Testimonials",
+      "testimonial_1_name": "James Harrison",
+      "testimonial_1_text": "The team handled my case with professionalism and expertise. Outstanding results.",
+      "testimonial_1_rating": 5,
+      "testimonial_2_name": "Sandra Williams",
+      "testimonial_2_text": "They fought tirelessly for my rights. I could not have asked for better representation.",
+      "testimonial_2_rating": 5,
+      "testimonial_3_name": "Robert Chen",
+      "testimonial_3_text": "Transparent communication and exceptional legal strategy. Highly recommended.",
+      "testimonial_3_rating": 5
+    },
+    "location": {
+      "heading": "Our Office",
+      "address": "500 Justice Ave, Suite 300, New York, NY 10001",
+      "phone": "+1 (212) 555-9876",
+      "email": "info@legalfirm.demo",
+      "hours": "Monday–Friday: 8:00 AM – 6:00 PM | Emergency: 24/7",
+      "map_url": "https://maps.google.com"
+    },
+    "cta": {
+      "heading": "Get the Representation You Deserve",
+      "subheading": "Schedule your free consultation today. No obligation, confidential.",
+      "button_label": "Book a Free Consultation",
+      "button_url": "mailto:info@legalfirm.demo"
+    }
+  }
+}

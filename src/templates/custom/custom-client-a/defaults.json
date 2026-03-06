@@ -1,0 +1,41 @@
+{
+  "templateKey": "custom-client-a",
+  "version": "1.0.0",
+  "sections": {
+    "hero": {
+      "heading_template": "Los {0} dentistas más confiables",
+      "city": "Miami",
+      "subheading": "Tecnología de punta y un equipo que se preocupa por tu salud bucal.",
+      "cta_label": "Agenda tu Cita Gratis",
+      "cta_url": "#contacto",
+      "badge": "⭐ #1 en satisfacción del paciente",
+      "image_url": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200&q=80"
+    },
+    "testimonials": {
+      "heading": "Pacientes felices en toda la ciudad",
+      "testimonial_1_name": "Luisa Fernández",
+      "testimonial_1_text": "¡El mejor servicio dental que he tenido! El personal es increíble.",
+      "testimonial_1_rating": 5,
+      "testimonial_2_name": "Diego Ruiz",
+      "testimonial_2_text": "Vine con miedo al dentista y salí con una enorme sonrisa. ¡100% recomendado!",
+      "testimonial_2_rating": 5,
+      "testimonial_3_name": "Patricia Vega",
+      "testimonial_3_text": "Precios justos y resultados extraordinarios. Sin duda el mejor de Miami.",
+      "testimonial_3_rating": 5
+    },
+    "location": {
+      "heading": "Visítanos en Miami",
+      "address": "1200 Brickell Ave, Suite 450, Miami, FL 33131",
+      "phone": "+1 (305) 555-7890",
+      "email": "hola@dentalpro.demo",
+      "hours": "Lunes–Sábado: 8:00–20:00 | Domingo: Urgencias",
+      "map_url": "https://maps.google.com"
+    },
+    "cta": {
+      "heading": "Tu mejor sonrisa empieza hoy",
+      "subheading": "Primera consulta gratis. Sin compromisos. Solo resultados.",
+      "button_label": "Llamar Ahora",
+      "button_url": "tel:+13055557890"
+    }
+  }
+}

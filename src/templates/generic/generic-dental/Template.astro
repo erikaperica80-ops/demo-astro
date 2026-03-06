@@ -1,0 +1,37 @@
+---
+import type { TemplateSchema, ThemeConfig } from '../../../lib/schema';
+import HeroSection from '../../../components/sections/HeroSection.astro';
+import TestimonialsSection from '../../../components/sections/TestimonialsSection.astro';
+import LocationSection from '../../../components/sections/LocationSection.astro';
+import CTASection from '../../../components/sections/CTASection.astro';
+
+export interface Props {
+  content: TemplateSchema;
+  theme: ThemeConfig;
+}
+
+const { content } = Astro.props;
+
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+const sectionComponentMap: Record<string, AstroComponentFactory> = {
+  hero: HeroSection,
+  testimonials: TestimonialsSection,
+  location: LocationSection,
+  cta: CTASection,
+};
+
+const activeSections = content.sections
+  .filter((s) => s.active)
+  .sort((a, b) => a.order - b.order);
+---
+
+<main>
+  {
+    activeSections.map((section) => {
+      const Component = sectionComponentMap[section.type];
+      if (!Component) return null;
+      return <Component fields={section.fields} />;
+    })
+  }
+</main>

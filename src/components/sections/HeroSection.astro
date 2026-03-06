@@ -1,0 +1,55 @@
+---
+import type { Field } from '../../lib/schema';
+
+export interface Props {
+  fields: Field[];
+}
+
+const { fields } = Astro.props;
+
+const getField = (id: string) =>
+  fields?.find((f) => f.id === id && f.active !== false);
+
+const heading = getField('heading')?.value ?? 'Welcome';
+const subheading = getField('subheading')?.value ?? '';
+const ctaLabel = getField('cta_label')?.value ?? 'Get Started';
+const ctaUrl = getField('cta_url')?.value ?? '#';
+const imageUrl = getField('image_url')?.value ?? '';
+---
+
+<section
+  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800"
+>
+  {
+    imageUrl && (
+      <div class="absolute inset-0">
+        <img
+          src={imageUrl as string}
+          alt="Hero background"
+          class="w-full h-full object-cover opacity-30"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900/70 to-gray-800/70" />
+      </div>
+    )
+  }
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white py-24">
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+      {heading}
+    </h1>
+    {
+      subheading && (
+        <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
+          {subheading}
+        </p>
+      )
+    }
+    <a
+      href={ctaUrl as string}
+      class="inline-block bg-[var(--color-accent,#f59e0b)] hover:opacity-90 transition-opacity text-gray-900 font-bold text-lg px-10 py-4 rounded-full shadow-xl"
+    >
+      {ctaLabel}
+    </a>
+  </div>
+</section>
