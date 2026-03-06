@@ -1,0 +1,97 @@
+---
+export interface Props {
+  fields: any[];
+}
+
+const { fields } = Astro.props;
+
+const getField = (id: string) =>
+  fields?.find((f: any) => f.id === id && f.active !== false);
+
+const heading = getField('heading')?.value ?? 'Find Us';
+const address = getField('address')?.value ?? '';
+const phone = getField('phone')?.value ?? '';
+const email = getField('email')?.value ?? '';
+const hours = getField('hours')?.value ?? '';
+const mapUrl = getField('map_url')?.value ?? '#';
+---
+
+<section class="py-20 bg-white" id="location">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
+      {heading}
+    </h2>
+
+    <div class="grid gap-10 md:grid-cols-2 items-start">
+      <div class="space-y-6">
+        {
+          address && (
+            <div class="flex items-start gap-4">
+              <span class="text-2xl mt-0.5" aria-hidden="true">📍</span>
+              <div>
+                <p class="font-semibold text-gray-700 mb-0.5">Address</p>
+                <p class="text-gray-600">{address}</p>
+              </div>
+            </div>
+          )
+        }
+        {
+          phone && (
+            <div class="flex items-start gap-4">
+              <span class="text-2xl mt-0.5" aria-hidden="true">📞</span>
+              <div>
+                <p class="font-semibold text-gray-700 mb-0.5">Phone</p>
+                <a
+                  href={`tel:${(phone as string).replace(/\s/g, '')}`}
+                  class="text-[var(--color-primary,#2563eb)] hover:underline"
+                >
+                  {phone}
+                </a>
+              </div>
+            </div>
+          )
+        }
+        {
+          email && (
+            <div class="flex items-start gap-4">
+              <span class="text-2xl mt-0.5" aria-hidden="true">✉️</span>
+              <div>
+                <p class="font-semibold text-gray-700 mb-0.5">Email</p>
+                <a
+                  href={`mailto:${email}`}
+                  class="text-[var(--color-primary,#2563eb)] hover:underline"
+                >
+                  {email}
+                </a>
+              </div>
+            </div>
+          )
+        }
+        {
+          hours && (
+            <div class="flex items-start gap-4">
+              <span class="text-2xl mt-0.5" aria-hidden="true">🕐</span>
+              <div>
+                <p class="font-semibold text-gray-700 mb-0.5">Hours</p>
+                <p class="text-gray-600 whitespace-pre-line">{hours}</p>
+              </div>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-md bg-gray-100 flex flex-col items-center justify-center p-10 gap-4 min-h-[220px]">
+        <span class="text-5xl" aria-hidden="true">🗺️</span>
+        <p class="text-gray-500 text-sm text-center">Map preview not available in demo mode.</p>
+        <a
+          href={mapUrl as string}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-[var(--color-primary,#2563eb)] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

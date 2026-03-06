@@ -1,0 +1,25 @@
+{
+  "templateKey": "custom-client-b",
+  "version": "1.0.0",
+  "sections": {
+    "hero": {
+      "heading": "Strategic Advisory for the Modern Enterprise",
+      "subheading": "Nexus Consulting brings together elite legal minds and business strategists to accelerate your growth.",
+      "cta_label": "Start Your Strategy Session",
+      "cta_url": "#engage",
+      "stat_1_value": "500+",
+      "stat_1_label": "Clients Served",
+      "stat_2_value": "$2B+",
+      "stat_2_label": "Deals Closed",
+      "stat_3_value": "20+",
+      "stat_3_label": "Years of Excellence",
+      "image_url": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80"
+    },
+    "cta": {
+      "heading": "Ready to Scale Your Business?",
+      "subheading": "Join hundreds of enterprises that trust Nexus for their most critical decisions.",
+      "button_label": "Engage Nexus Today",
+      "button_url": "mailto:engage@nexusconsulting.demo"
+    }
+  }
+}

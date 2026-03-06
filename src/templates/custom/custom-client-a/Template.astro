@@ -1,0 +1,98 @@
+---
+import type { TemplateSchema, ThemeConfig } from '../../../lib/schema';
+import TestimonialsSection from '../../../components/sections/TestimonialsSection.astro';
+import LocationSection from '../../../components/sections/LocationSection.astro';
+import CTASection from '../../../components/sections/CTASection.astro';
+
+export interface Props {
+  content: TemplateSchema;
+  theme: ThemeConfig;
+}
+
+const { content } = Astro.props;
+
+const getSection = (id: string) =>
+  content.sections.find((s) => s.id === id && s.active);
+
+const getField = (fields: any[], fieldId: string) =>
+  fields?.find((f: any) => f.id === fieldId && f.active !== false);
+
+const heroSection = getSection('hero');
+const heroFields = heroSection?.fields ?? [];
+
+const headingTemplate =
+  (getField(heroFields, 'heading_template')?.value as string) ?? 'Los {0} dentistas más confiables';
+const city = (getField(heroFields, 'city')?.value as string) ?? 'tu ciudad';
+const heading = headingTemplate.replace('{0}', city);
+
+const subheading =
+  (getField(heroFields, 'subheading')?.value as string) ??
+  'Tecnología de punta y un equipo que se preocupa por ti.';
+const ctaLabel = (getField(heroFields, 'cta_label')?.value as string) ?? 'Agenda tu Cita';
+const ctaUrl = (getField(heroFields, 'cta_url')?.value as string) ?? '#';
+const badge = (getField(heroFields, 'badge')?.value as string) ?? '';
+const imageUrl = (getField(heroFields, 'image_url')?.value as string) ?? '';
+
+const testimonialsSection = getSection('testimonials');
+const locationSection = getSection('location');
+const ctaSection = getSection('cta');
+
+const otherSections = content.sections
+  .filter((s) => s.active && s.id !== 'hero')
+  .sort((a, b) => a.order - b.order);
+
+const sectionComponentMap: Record<string, any> = {
+  testimonials: TestimonialsSection,
+  location: LocationSection,
+  cta: CTASection,
+};
+---
+
+<main>
+  <!-- Custom Hero with tokenized city replacement -->
+  {
+    heroSection && (
+      <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-900 to-green-700">
+        {imageUrl && (
+          <div class="absolute inset-0">
+            <img
+              src={imageUrl}
+              alt="Hero background"
+              class="w-full h-full object-cover opacity-20"
+              loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-br from-green-900/75 to-green-700/75" />
+          </div>
+        )}
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white py-24">
+          {badge && (
+            <div class="inline-block bg-yellow-400 text-gray-900 font-bold text-sm px-4 py-1.5 rounded-full mb-6 shadow-md">
+              {badge}
+            </div>
+          )}
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+            {heading}
+          </h1>
+          <p class="text-xl md:text-2xl text-green-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+            {subheading}
+          </p>
+          <a
+            href={ctaUrl}
+            class="inline-block bg-yellow-400 hover:bg-yellow-300 transition-colors text-gray-900 font-bold text-lg px-10 py-4 rounded-full shadow-xl"
+          >
+            {ctaLabel}
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Remaining sections -->
+  {
+    otherSections.map((section) => {
+      const Component = sectionComponentMap[section.type];
+      if (!Component) return null;
+      return <Component fields={section.fields} />;
+    })
+  }
+</main>

@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const demos = [
+  {
+    slug: 'dental-demo',
+    name: 'Dental Demo',
+    description: 'Generic dental clinic template — "Sonríe con Confianza"',
+    color: 'bg-sky-500',
+    emoji: '🦷',
+  },
+  {
+    slug: 'legal-demo',
+    name: 'Legal Demo',
+    description: 'Generic legal firm template — "Defending Your Rights"',
+    color: 'bg-blue-900',
+    emoji: '⚖️',
+  },
+  {
+    slug: 'client-a',
+    name: 'Client A — Dental Pro',
+    description: 'Custom dental client with tokenized city text: "Los {city} dentistas más confiables"',
+    color: 'bg-green-600',
+    emoji: '😁',
+  },
+  {
+    slug: 'client-b',
+    name: 'Client B — Nexus Consulting',
+    description: 'Custom legal/consulting client with unique section composition and enterprise design',
+    color: 'bg-violet-700',
+    emoji: '🏢',
+  },
+];
+---
+
+<BaseLayout
+  title="Multi-Tenant Astro Demo — Landing Page Architecture"
+  description="Explore the Astro + Tailwind multi-tenant landing page architecture with four demo tenants."
+  theme={{ primary: '#6d28d9', secondary: '#4c1d95', accent: '#f59e0b', font: 'Inter, system-ui, sans-serif' }}
+>
+  <div class="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 text-white">
+    <!-- Header -->
+    <header class="border-b border-white/10 py-6 px-6">
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl" aria-hidden="true">🚀</span>
+          <div>
+            <h1 class="text-lg font-bold text-white">demo-astro</h1>
+            <p class="text-xs text-gray-400">Multi-Tenant Landing Page Architecture</p>
+          </div>
+        </div>
+        <a
+          href="https://github.com"
+          class="text-sm text-gray-400 hover:text-white transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-20 px-6 text-center">
+      <div class="max-w-3xl mx-auto">
+        <div class="inline-block bg-violet-600/20 border border-violet-500/30 text-violet-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-8">
+          Astro 5 + Tailwind CSS + SSR
+        </div>
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+          One Codebase.<br />
+          <span class="text-violet-400">Infinite Tenants.</span>
+        </h2>
+        <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+          A production-ready multi-tenant architecture built with Astro SSR and Tailwind CSS.
+          Each tenant gets a fully customized landing page powered by a shared schema and component system.
+        </p>
+        <p class="text-sm text-gray-500">
+          Select a demo tenant below to preview its landing page.
+        </p>
+      </div>
+    </section>
+
+    <!-- Demo grid -->
+    <section class="pb-24 px-6">
+      <div class="max-w-4xl mx-auto grid gap-6 md:grid-cols-2">
+        {
+          demos.map((demo) => (
+            <a
+              href={`/${demo.slug}`}
+              class="group relative bg-gray-800/50 border border-gray-700/50 rounded-2xl p-8 hover:border-violet-500/50 hover:bg-gray-800/80 transition-all"
+            >
+              <div class={`inline-flex items-center justify-center w-14 h-14 ${demo.color} rounded-xl text-2xl mb-5 shadow-lg`}>
+                {demo.emoji}
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">
+                {demo.name}
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">{demo.description}</p>
+              <div class="flex items-center gap-1.5 text-violet-400 text-sm font-medium">
+                <span>View demo</span>
+                <span class="group-hover:translate-x-1 transition-transform inline-block">→</span>
+              </div>
+              <div class="absolute top-4 right-4 text-xs text-gray-600 font-mono">
+                /{demo.slug}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Architecture overview -->
+    <section class="border-t border-white/10 py-16 px-6 bg-gray-900/50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-white mb-10 text-center">Architecture Overview</h2>
+        <div class="grid gap-6 md:grid-cols-3 text-sm">
+          <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50">
+            <div class="text-2xl mb-3">🗂️</div>
+            <h3 class="font-bold text-white mb-2">Schema-Driven</h3>
+            <p class="text-gray-400 leading-relaxed">
+              Each tenant's content is a structured <code class="text-violet-400">TemplateSchema</code> with
+              typed <code class="text-violet-400">Field</code> objects (id, type, value, active).
+            </p>
+          </div>
+          <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50">
+            <div class="text-2xl mb-3">🎨</div>
+            <h3 class="font-bold text-white mb-2">Theme Tokens</h3>
+            <p class="text-gray-400 leading-relaxed">
+              Every tenant defines <code class="text-violet-400">primary</code>,{' '}
+              <code class="text-violet-400">secondary</code>, <code class="text-violet-400">accent</code>,
+              and <code class="text-violet-400">font</code> — injected as CSS variables.
+            </p>
+          </div>
+          <div class="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50">
+            <div class="text-2xl mb-3">⚡</div>
+            <h3 class="font-bold text-white mb-2">SSR + Dynamic</h3>
+            <p class="text-gray-400 leading-relaxed">
+              Astro's <code class="text-violet-400">[tenant]</code> dynamic route resolves templates
+              server-side via <code class="text-violet-400">resolveTemplate()</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 px-6 text-center text-gray-500 text-sm">
+      Built with Astro 5 + Tailwind CSS. Multi-tenant SSR demo.
+    </footer>
+  </div>
+</BaseLayout>

@@ -1,0 +1,120 @@
+---
+import type { TemplateSchema, ThemeConfig } from '../../../lib/schema';
+import CTASection from '../../../components/sections/CTASection.astro';
+
+export interface Props {
+  content: TemplateSchema;
+  theme: ThemeConfig;
+}
+
+const { content } = Astro.props;
+
+const getSection = (id: string) =>
+  content.sections.find((s) => s.id === id && s.active);
+
+const getField = (fields: any[], fieldId: string) =>
+  fields?.find((f: any) => f.id === fieldId && f.active !== false);
+
+const heroSection = getSection('hero');
+const ctaSection = getSection('cta');
+
+const heroFields = heroSection?.fields ?? [];
+
+const heading = (getField(heroFields, 'heading')?.value as string) ?? 'Strategic Advisory';
+const subheading = (getField(heroFields, 'subheading')?.value as string) ?? '';
+const ctaLabel = (getField(heroFields, 'cta_label')?.value as string) ?? 'Get Started';
+const ctaUrl = (getField(heroFields, 'cta_url')?.value as string) ?? '#';
+const imageUrl = (getField(heroFields, 'image_url')?.value as string) ?? '';
+
+const stat1Value = (getField(heroFields, 'stat_1_value')?.value as string) ?? '';
+const stat1Label = (getField(heroFields, 'stat_1_label')?.value as string) ?? '';
+const stat2Value = (getField(heroFields, 'stat_2_value')?.value as string) ?? '';
+const stat2Label = (getField(heroFields, 'stat_2_label')?.value as string) ?? '';
+const stat3Value = (getField(heroFields, 'stat_3_value')?.value as string) ?? '';
+const stat3Label = (getField(heroFields, 'stat_3_label')?.value as string) ?? '';
+
+const stats = [
+  { value: stat1Value, label: stat1Label },
+  { value: stat2Value, label: stat2Label },
+  { value: stat3Value, label: stat3Label },
+].filter((s) => s.value);
+---
+
+<main>
+  <!-- Custom enterprise hero with stats bar -->
+  {
+    heroSection && (
+      <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gray-950">
+        {imageUrl && (
+          <div class="absolute inset-0">
+            <img
+              src={imageUrl}
+              alt="Hero background"
+              class="w-full h-full object-cover opacity-15"
+              loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-950/80 via-gray-950/60 to-gray-950" />
+          </div>
+        )}
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white py-24">
+          <div class="inline-block bg-purple-600/20 border border-purple-500/30 text-purple-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-8 backdrop-blur-sm">
+            Nexus Consulting
+          </div>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+            {heading}
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            {subheading}
+          </p>
+          <a
+            href={ctaUrl}
+            class="inline-block bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 transition-all text-white font-bold text-lg px-10 py-4 rounded-full shadow-2xl shadow-purple-900/50"
+          >
+            {ctaLabel}
+          </a>
+        </div>
+
+        {stats.length > 0 && (
+          <div class="relative z-10 w-full border-t border-white/10 bg-white/5 backdrop-blur-sm">
+            <div class="max-w-4xl mx-auto px-6 py-8 grid grid-cols-3 gap-8 text-center text-white">
+              {stats.map((stat) => (
+                <div>
+                  <p class="text-3xl md:text-4xl font-extrabold text-purple-300">{stat.value}</p>
+                  <p class="text-sm text-gray-400 mt-1 uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+    )
+  }
+
+  <!-- Services highlight strip -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-12">
+        What We Do
+      </h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        {
+          [
+            { icon: '⚖️', title: 'Legal Strategy', desc: 'Expert counsel on corporate law, compliance, and dispute resolution.' },
+            { icon: '📈', title: 'Business Advisory', desc: 'Data-driven growth strategy for scaling enterprises globally.' },
+            { icon: '🤝', title: 'M&A Consulting', desc: 'End-to-end mergers, acquisitions, and integration advisory.' },
+          ].map((service) => (
+            <div class="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-8 hover:border-purple-500/50 transition-colors">
+              <div class="text-4xl mb-4">{service.icon}</div>
+              <h3 class="text-xl font-bold text-white mb-3">{service.title}</h3>
+              <p class="text-gray-400 leading-relaxed">{service.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  {ctaSection && <CTASection fields={ctaSection.fields} />}
+</main>

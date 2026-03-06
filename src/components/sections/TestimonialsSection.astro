@@ -1,0 +1,52 @@
+---
+export interface Props {
+  fields: any[];
+}
+
+const { fields } = Astro.props;
+
+const getField = (id: string) =>
+  fields?.find((f: any) => f.id === id && f.active !== false);
+
+const heading = getField('heading')?.value ?? 'What Our Clients Say';
+
+interface Testimonial {
+  name: string;
+  text: string;
+  rating: number;
+}
+
+const testimonials: Testimonial[] = [1, 2, 3]
+  .map((n) => ({
+    name: (getField(`testimonial_${n}_name`)?.value ?? '') as string,
+    text: (getField(`testimonial_${n}_text`)?.value ?? '') as string,
+    rating: Number(getField(`testimonial_${n}_rating`)?.value ?? 5),
+  }))
+  .filter((t) => t.name || t.text);
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
+      {heading}
+    </h2>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        testimonials.map((t) => (
+          <article class="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow">
+            <div class="flex gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span class={i < t.rating ? 'text-yellow-400' : 'text-gray-300'} aria-hidden="true">
+                  ★
+                </span>
+              ))}
+            </div>
+            <p class="text-gray-600 leading-relaxed flex-1">"{t.text}"</p>
+            <footer class="font-semibold text-gray-800">— {t.name}</footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
