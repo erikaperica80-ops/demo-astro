@@ -1,12 +1,14 @@
 ---
+import type { Field } from '../../lib/schema';
+
 export interface Props {
-  fields: any[];
+  fields: Field[];
 }
 
 const { fields } = Astro.props;
 
 const getField = (id: string) =>
-  fields?.find((f: any) => f.id === id && f.active !== false);
+  fields?.find((f) => f.id === id && f.active !== false);
 
 const heading = getField('heading')?.value ?? 'Ready to Get Started?';
 const subheading = getField('subheading')?.value ?? '';

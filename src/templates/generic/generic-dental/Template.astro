@@ -12,7 +12,9 @@ export interface Props {
 
 const { content } = Astro.props;
 
-const sectionComponentMap: Record<string, any> = {
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+const sectionComponentMap: Record<string, AstroComponentFactory> = {
   hero: HeroSection,
   testimonials: TestimonialsSection,
   location: LocationSection,

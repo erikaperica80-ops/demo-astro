@@ -12,8 +12,10 @@ const { content } = Astro.props;
 const getSection = (id: string) =>
   content.sections.find((s) => s.id === id && s.active);
 
-const getField = (fields: any[], fieldId: string) =>
-  fields?.find((f: any) => f.id === fieldId && f.active !== false);
+import type { Field } from '../../../lib/schema';
+
+const getField = (fields: Field[], fieldId: string) =>
+  fields?.find((f) => f.id === fieldId && f.active !== false);
 
 const heroSection = getSection('hero');
 const ctaSection = getSection('cta');

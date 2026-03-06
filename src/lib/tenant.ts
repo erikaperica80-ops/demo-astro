@@ -860,6 +860,15 @@ const tenants: Record<string, TenantConfig> = {
   },
 };
 
+/**
+ * Retrieves the landing page configuration for a given tenant.
+ *
+ * This is a mock data source shaped as an API-ready DTO. In production, replace
+ * the `tenants` map with a fetch call to the .NET persistence API.
+ *
+ * @param tenantId - The unique identifier of the tenant (e.g. `'dental-demo'`, `'client-a'`).
+ * @returns The tenant configuration, or `null` if no matching tenant is found.
+ */
 export function getTenantConfig(tenantId: string): TenantConfig | null {
   return tenants[tenantId] ?? null;
 }

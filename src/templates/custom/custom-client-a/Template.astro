@@ -14,8 +14,10 @@ const { content } = Astro.props;
 const getSection = (id: string) =>
   content.sections.find((s) => s.id === id && s.active);
 
-const getField = (fields: any[], fieldId: string) =>
-  fields?.find((f: any) => f.id === fieldId && f.active !== false);
+import type { Field } from '../../../lib/schema';
+
+const getField = (fields: Field[], fieldId: string) =>
+  fields?.find((f) => f.id === fieldId && f.active !== false);
 
 const heroSection = getSection('hero');
 const heroFields = heroSection?.fields ?? [];
@@ -41,7 +43,9 @@ const otherSections = content.sections
   .filter((s) => s.active && s.id !== 'hero')
   .sort((a, b) => a.order - b.order);
 
-const sectionComponentMap: Record<string, any> = {
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+const sectionComponentMap: Record<string, AstroComponentFactory> = {
   testimonials: TestimonialsSection,
   location: LocationSection,
   cta: CTASection,
